@@ -32,10 +32,7 @@ class ScenesManager:
                 self.current_scene.handle_input(key)
 
             if self.current_scene.has_frame_changed():
-                debug_log("CHANGED")
-                self.current_scene.draw(self.win)
+                self.current_scene.render(self.win)
                 self.win.refresh()
-            else:
-                debug_log("---")
 
             curses.napms(16)

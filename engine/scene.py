@@ -1,5 +1,7 @@
 from utils.log import debug_log
-import copy
+from engine.sprites_manager import SpritesManager
+from engine.renderer import Renderer
+import copy, time
 
 class Scene:
     def __init__(self, app):
@@ -7,6 +9,11 @@ class Scene:
         self.force_redraw = True
         self.prev_frame_data = None
         self.curr_frame_data = None
+
+        win_size = app.win.getmaxyx()
+
+        self.sprites_manager = SpritesManager(win_size)
+        self.renderer = Renderer(app.win)
 
     def on_enter(self):
         self.force_redraw = True
@@ -20,6 +27,21 @@ class Scene:
         pass
 
     def update(self):
+        for element in self.curr_frame_data:
+            if element["type"] == "animation":
+                now = time.time()
+                if now - element["last_update"] >= element["update_in"]:
+                    if element["data"]["curr_frame"] + 1 >= element["frames_num"]:
+                        if element["loop"]:
+                            element["data"]["curr_frame"] = 0
+                            element["last_update"] = now
+                        else:
+                            element["data"]["curr_frame"] = element["frames_num"] - 1
+                    else:
+                        element["data"]["curr_frame"] += 1
+                        element["last_update"] = now
+
+    def update_background(self):
         pass
 
     def update_frame(self):
@@ -37,5 +59,7 @@ class Scene:
 
         return False
 
-    def draw(self, stdscr):
-        pass
+    def render(self, win):
+        win.clear()
+        sprites = self.sprites_manager.get_all_sprites(self.curr_frame_data)
+        self.renderer.render(sprites)

@@ -6,64 +6,66 @@ from utils.log import debug_log
 class MainMenu(Scene):
     def __init__(self, app):
         super().__init__(app)
-        self.options = [
-            {
-                "title": "Почати гру",
-                "action": lambda: self.app.set_scene("game")
-            },
-            {
-                "title": "Налаштування",
-                "action": lambda: self.app.set_scene("settings")
-            },
-            {
-                "title": "Вийти",
-                "action": lambda: exit()
-            },
+        self.options_action = [
+            lambda: self.app.set_scene("game"),
+            lambda: self.app.set_scene("settings"),
+            lambda: exit()
         ]
-        self.curr_frame_data = {
-            "selected_option": 0,
-            "background": {
-                "frame_nr": 0,
+        self.curr_frame_data = [
+            {
+                "type": "generated",
+                "name": "main_menu_options",
+                "data": {
+                    "selected": 0,
+                    "options": ["Почати гру", "Налаштування", "Вийти"]
+                }
+            },
+            {
+                "type": "generated",
+                "name": "background_dots" 
+            },
+            {
+                "type": "animation",
+                "update_in": 1,
                 "last_update": 0,
-                "update_in": 1
+                "frames_num": 4,
+                "loop": True,
+                "name": "menu_anim_bg",
+                "data": {
+                    "curr_frame": 1
+                }
             }
-        }
-        self.options_padding = {"w": 5, "h":2}
+        ]
 
         super().on_enter()
 
-    def update(self):
-        self.update_background()
-
-    def update_background(self):
-        now = time.time()
-        if now - self.curr_frame_data["background"]["last_update"] >= self.curr_frame_data["background"]["update_in"]:
-            self.curr_frame_data["background"]["frame_nr"] += 1
-            self.curr_frame_data["background"]["last_update"] = now
-
     def handle_input(self, key):
-        selected_option = self.curr_frame_data["selected_option"]
+        menu_element = self.curr_frame_data[0]
+        data = menu_element["data"]
 
+        selected_option = data["selected"]
+        options = data["options"]
+
+        # --- Навігація ----------------------------
         if key == curses.KEY_UP:
-            if (selected_option - 1) >= 0:
+            if selected_option > 0:
                 selected_option -= 1
+
         elif key == curses.KEY_DOWN:
-            if (selected_option + 1) < len(self.options):
+            if selected_option < len(options) - 1:
                 selected_option += 1
+
+        # --- Вибір пункту ------------------------
         elif key == curses.KEY_ENTER or key in [10, 13]:
-            option = self.options[selected_option]
-            option["action"]()
+            action = self.options_action[selected_option]
+            action()   # викликаємо функцію
+
+        # --- ESC вихід ---------------------------
         elif key == 27:
             exit()
 
-        self.curr_frame_data["selected_option"] = selected_option
-
-    def draw(self, win):
-        win.clear()
-        h, w = win.getmaxyx()
-
-        self.draw_background(win, h, w)
-        self.draw_options(win, h, w)
+        # --- Оновлюємо значення в curr_frame_data --
+        data["selected"] = selected_option
 
     def draw_background(self, win, h, w):
         if self.curr_frame_data["background"]["frame_nr"] > 3:

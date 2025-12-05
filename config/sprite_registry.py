@@ -2,13 +2,9 @@ SPRITES = {
     # -------------------------- #
     #        МЕНЮ                #
     # -------------------------- #
-    "menu_bg": {
+    "menu_anim_top_freddy": {
         "type": "static",
-        "path": "menu/bg/bg0.txt",
-        "z": 2,
-        "x": "right",
-        "y": "bottom",
-        #"padding": {"x": 10, "y": 5}
+        "path": "menu/anim/toy_freddy.txt"
     },
     "game_office_l": {
         "type": "static",
@@ -31,27 +27,19 @@ SPRITES = {
             "menu/bg/bg3.txt"
         ],
         "update_in": 1,
-        "loop": True,
-        "z": 2,
-        "x": "right",
-        "y": "bottom",
-        "padding": {"x": 10, "y": 5}
+        "loop": True
     },
 
     # -------------------------- #
     #      ПРОЦЕДУРНІ ФОНИ       #
     # -------------------------- #
+    "None": {
+        "type": "generated"
+    },
     "background_dots": {
-        "type": "generated",
-        "bg": True,
-        "z": 0
+        "type": "generated"
     },
     "main_menu_options": {
-        "type": "generated",
-        "bg": True,
-        "z": 3,
-        "x": "left",
-        "y": "bottom",
-        "padding": {"x":5, "y":2}
+        "type": "generated"
     },
 }

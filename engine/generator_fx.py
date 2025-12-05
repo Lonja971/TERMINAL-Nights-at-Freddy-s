@@ -1,6 +1,9 @@
 from utils.log import debug_log
 import curses
 
+def none_bg(data):
+    return []
+
 def generate_dot_background(element_data):
     win_size = element_data["win_size"]
     content = []

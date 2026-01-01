@@ -2,9 +2,33 @@ SPRITES = {
     # -------------------------- #
     #        МЕНЮ                #
     # -------------------------- #
-    "menu_anim_top_freddy": {
+    "menu_anim_toy_freddy": {
         "type": "static",
         "path": "menu/anim/toy_freddy.txt"
+    },
+    "menu_anim_old_freddy": {
+        "type": "static",
+        "path": "menu/anim/old_freddy.txt"
+    },
+    "menu_anim_toy_bonnie": {
+        "type": "static",
+        "path": "menu/anim/toy_bonnie.txt"
+    },
+    "menu_anim_old_bonnie": {
+        "type": "static",
+        "path": "menu/anim/old_bonnie.txt"
+    },
+    "menu_anim_toy_chica": {
+        "type": "static",
+        "path": "menu/anim/toy_chica.txt"
+    },
+    "menu_anim_old_chica": {
+        "type": "static",
+        "path": "menu/anim/old_chica.txt"
+    },
+    "menu_logo_text": {
+        "type": "static",
+        "path": "menu/name3.txt",
     },
     "game_office_l": {
         "type": "static",
@@ -29,6 +53,17 @@ SPRITES = {
         "update_in": 1,
         "loop": True
     },
+    "office_vent_anima": {
+        "type": "animation",
+        "frames": [
+            "game/office/vent/1.txt",
+            "game/office/vent/2.txt",
+            "game/office/vent/3.txt",
+            "game/office/vent/4.txt",
+        ],
+        "update_in": 0.3,
+        "loop": True
+    },
 
     # -------------------------- #
     #      ПРОЦЕДУРНІ ФОНИ       #
@@ -40,6 +75,15 @@ SPRITES = {
         "type": "generated"
     },
     "main_menu_options": {
+        "type": "generated"
+    },
+    "game_buttery": {
+        "type": "generated"
+    },
+    "game_timeblock": {
+        "type": "generated"
+    },
+    "game_nightnumber": {
         "type": "generated"
     },
 }

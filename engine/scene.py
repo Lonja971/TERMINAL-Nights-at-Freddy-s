@@ -34,18 +34,20 @@ class Scene:
                 update_in = element.get("update_in", 1)
                 frames_num = element.get("frames_num", 1)
                 loop = element.get("loop", True)
-                curr_frame = element["data"].get("curr_frame", 0)
+                curr_frame = element.get("data", {}).get("curr_frame", 0)
 
                 if now - last_update >= update_in:
                     if curr_frame + 1 >= frames_num:
                         if loop:
-                            element["data"]["curr_frame"] = 0
+                            element.setdefault("data", {})["curr_frame"] = 0
                         else:
-                            element["data"]["curr_frame"] = frames_num - 1
+                            element.setdefault("data", {})["curr_frame"] = frames_num - 1
                     else:
-                        element["data"]["curr_frame"] = curr_frame + 1
+                        element.setdefault("data", {})["curr_frame"] = curr_frame + 1
 
                     element["last_update"] = now
+
+        self.extra_update()
 
     def update_background(self):
         pass
@@ -88,3 +90,6 @@ class Scene:
     def render(self, win):
         updated_symbols = self.sprites_manager.get_update(self.curr_frame_data)
         self.renderer.render(updated_symbols)
+
+    def extra_update(self):
+        pass

@@ -39,6 +39,8 @@ class SpritesManager:
         # -----------------------------
         for name, runtime in frame_data["sprites"].items():
             cfg = room_def["sprites"].get(name, {})
+            if cfg == {}:
+                continue
 
             changed = self._sprite_changed(name, runtime)
 

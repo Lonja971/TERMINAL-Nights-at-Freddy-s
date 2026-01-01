@@ -80,7 +80,7 @@ class Renderer:
                     old_char, old_attr = self.backbuffer[sy][sx]
 
                     # якщо символ або атрибут змінилися -> малюємо
-                    if (new_char != old_char) or (new_attr != old_attr):
+                    if (new_char == " ") or (new_char != old_char) or (new_attr != old_attr):
                         try:
                             if new_attr:
                                 self.win.addch(sy, sx, new_char, new_attr)

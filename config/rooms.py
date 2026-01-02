@@ -97,8 +97,14 @@ ROOMS = {
                 "name": "office_vent_anima",
                 "x": "right",
                 "y": "bottom",
-                "z": 4,
+                "z": 6,
                 "padding": {"x": -25, "y": 0}
+            },
+            "center_light": {
+                "name": "game_center_light",
+                "x": 200,
+                "y": "top",
+                "z": 3,
             }
         }
     },
@@ -133,8 +139,14 @@ ROOMS = {
                 "name": "office_vent_anima",
                 "x": "right",
                 "y": "bottom",
-                "z": 4,
+                "z": 6,
                 "padding": {"x": 35, "y": 0}
+            },
+            "center_light": {
+                "name": "game_center_light",
+                "x": 200,
+                "y": "top",
+                "z": 3,
             }
         }
     },

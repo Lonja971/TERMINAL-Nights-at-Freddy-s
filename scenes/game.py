@@ -36,6 +36,9 @@ class GameScene(Scene):
                     "update_in": 0.07,
                     "frames_num": 4,
                     "loop": True
+                },
+                "center_light": {
+                    "type": "static",
                 }
             }
         }
@@ -50,27 +53,35 @@ class GameScene(Scene):
             dt = now - self._last_tick
             self._last_tick = now
 
-            self.game.update(dt)
+            self.game.update_states(dt)
+            self.process_scene_frames()
 
-            if int(self.game.state.buttery) != self.curr_frame_data["sprites"]["game_buttery"]["data"]["value"]:
-                self.curr_frame_data["sprites"]["game_buttery"]["data"]["value"] = self.game.state.buttery
+            debug_log(self.curr_frame_data)
 
-            game_time = self.game.state.time
-            sprite_time = self.curr_frame_data["sprites"]["game_timeblock"]["data"]["time"]
-            
-            if game_time != sprite_time:
-                self.curr_frame_data["sprites"]["game_timeblock"]["data"]["time"] = game_time.copy()
+    def process_scene_frames(self):
+        processed_frames = self.game.update_scene_frames(self.curr_frame_data)
 
+        if processed_frames["rewrite"] == True:
+            self.curr_frame_data = processed_frames["update"]
+            return
+        
+        if processed_frames["delete"]:
+            for key in processed_frames["delete"]:
+                self.curr_frame_data["sprites"].pop(key)
 
+        if processed_frames["update"]:
+            for key, sprite in processed_frames["update"].items():
+                self.curr_frame_data["sprites"][key] = sprite
 
     def handle_input(self, key):
         if key == 27:  # ESC
             self.app.set_scene("menu")
         elif key in [ord('a'), ord('A')]:
-
-            self.curr_frame_data["room"] = "game_office_l"
+            self.game.state.set_office_pos("l")
 
         elif key in [ord('d'), ord('D')]:
+            self.game.state.set_office_pos("r")
 
-            self.curr_frame_data["room"] = "game_office_r"
+        elif key in [ord(' ')]:
+            self.game.state.set_light()
     

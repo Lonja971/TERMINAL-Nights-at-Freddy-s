@@ -38,6 +38,10 @@ SPRITES = {
         "type": "static",
         "path": "game/office/r.txt",
     },
+    "game_center_light": {
+        "type": "static",
+        "path": "game/office/center_light.txt",
+    },
 
     # -------------------- #
     #      АНІМАЦІЇ        #
@@ -61,7 +65,7 @@ SPRITES = {
             "game/office/vent/3.txt",
             "game/office/vent/4.txt",
         ],
-        "update_in": 0.3,
+        "update_in": 0.07,
         "loop": True
     },
 

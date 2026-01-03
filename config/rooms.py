@@ -102,8 +102,8 @@ ROOMS = {
             },
             "center_light": {
                 "name": "game_center_light",
-                "x": 200,
-                "y": "top",
+                "x": 122,
+                "y": 22,
                 "z": 3,
             }
         }
@@ -144,8 +144,8 @@ ROOMS = {
             },
             "center_light": {
                 "name": "game_center_light",
-                "x": 200,
-                "y": "top",
+                "x": 59,
+                "y": 22,
                 "z": 3,
             }
         }

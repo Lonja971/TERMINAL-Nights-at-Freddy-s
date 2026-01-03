@@ -105,6 +105,12 @@ ROOMS = {
                 "x": 122,
                 "y": 22,
                 "z": 3,
+            },
+            "left_light": {
+                "name": "game_left_light",
+                "x": "left",
+                "y": "bottom",
+                "z": 10,
             }
         }
     },
@@ -147,7 +153,13 @@ ROOMS = {
                 "x": 59,
                 "y": 22,
                 "z": 3,
-            }
+            },
+            "right_light": {
+                "name": "game_right_light",
+                "x": "right",
+                "y": "bottom",
+                "z": 10,
+            },
         }
     },
 }

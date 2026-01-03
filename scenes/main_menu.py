@@ -1,7 +1,9 @@
 import curses, time, random
 from engine.scene import Scene
+from engine.input_manager import InputManager
 from utils.sprite_loader import load_sprite
 from utils.log import debug_log
+from pynput import keyboard
 
 class MainMenu(Scene):
     def __init__(self, app):
@@ -60,28 +62,27 @@ class MainMenu(Scene):
 
         super().on_enter()
 
-    def handle_input(self, key):
+    def handle_input(self, input):
         menu_element = self.curr_frame_data["sprites"]["main_menu_options"]
         data = menu_element["data"]
 
         selected_option = data["selected"]
         options = data["options"]
 
-        if key == curses.KEY_UP:
+        if input.was_pressed(keyboard.Key.up):
             if selected_option > 0:
                 selected_option -= 1
 
-        elif key == curses.KEY_DOWN:
+        if input.was_pressed(keyboard.Key.down):
             if selected_option < len(options) - 1:
                 selected_option += 1
 
-        elif key == curses.KEY_ENTER or key in [10, 13]:
+        if input.is_held(keyboard.Key.esc):
+            exit()
+
+        if input.is_held(keyboard.Key.enter):
             action = self.options_action[selected_option]
             action()
-
-        # --- ESC вихід ---------------------------
-        elif key == 27:
-            exit()
 
         data["selected"] = selected_option
 

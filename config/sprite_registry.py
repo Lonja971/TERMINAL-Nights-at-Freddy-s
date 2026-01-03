@@ -42,6 +42,14 @@ SPRITES = {
         "type": "static",
         "path": "game/office/center_light.txt",
     },
+    "game_left_light": {
+        "type": "static",
+        "path": "game/office/left_light.txt",
+    },
+    "game_right_light": {
+        "type": "static",
+        "path": "game/office/right_light.txt",
+    },
 
     # -------------------- #
     #      АНІМАЦІЇ        #

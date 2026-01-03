@@ -1,5 +1,6 @@
 from config.rooms import ROOMS
 from config.sprite_registry import SPRITES
+from utils.log import debug_log
 
 class GameSceneFrames:
     def __init__(self, state, night):
@@ -39,10 +40,22 @@ class GameSceneFrames:
             }
         }
 
-        if self.state.light != True:
+        if self.state.light != "center":
             frames["sprites"]["center_light"] = {
                 "type": "static"
             }
+
+        if self.state.office_pos == "l":
+            if self.state.light == "left":
+                frames["sprites"]["left_light"] = {
+                    "type": "static"
+                }
+
+        if self.state.office_pos == "r":
+            if self.state.light == "right":
+                frames["sprites"]["right_light"] = {
+                    "type": "static"
+                }
 
         return frames
     
@@ -53,10 +66,10 @@ class GameSceneFrames:
         }
         curr_sprites_frames = curr_scene_frames["sprites"]
 
-        if self.state.light and "center_light" in curr_sprites_frames:
+        if self.state.light == "center" and "center_light" in curr_sprites_frames:
             frames_data["delete"].append("center_light")
 
-        if not self.state.light and "center_light" not in curr_sprites_frames:
+        if not self.state.light == "center" and "center_light" not in curr_sprites_frames:
             frames_data["update"]["center_light"] = {
                 "type": "static"
             }
@@ -76,6 +89,23 @@ class GameSceneFrames:
                         "time": self.state.time.copy()
                     }
             }
+
+        if self.state.office_pos == "l":
+            if self.state.light == "left" and "left_light" not in curr_sprites_frames:
+                frames_data["update"]["left_light"] = {
+                    "type": "static"
+                }
+
+            if self.state.light != "left" and "left_light" in curr_sprites_frames:
+                frames_data["delete"].append("left_light")
+        else:
+            if self.state.light == "right" and "right_light" not in curr_sprites_frames:
+                frames_data["update"]["right_light"] = {
+                    "type": "static"
+                }
+
+            if self.state.light != "right" and "right_light" in curr_sprites_frames:
+                frames_data["delete"].append("right_light")
 
         return frames_data
 

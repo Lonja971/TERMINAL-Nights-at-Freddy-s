@@ -2,6 +2,7 @@ from engine.scene import Scene
 from utils.log import debug_log
 from game.game import Game
 import time
+from pynput import keyboard
 
 class GameScene(Scene):
     def __init__(self, app):
@@ -10,6 +11,7 @@ class GameScene(Scene):
         self.tick_rate = 0.10
         self._last_tick = time.time()
         self.paused = False
+        self.light_pushed = False
         self.curr_frame_data = {
             "room": "game_office_l",
             "sprites": {
@@ -56,8 +58,6 @@ class GameScene(Scene):
             self.game.update_states(dt)
             self.process_scene_frames()
 
-            debug_log(self.curr_frame_data)
-
     def process_scene_frames(self):
         processed_frames = self.game.update_scene_frames(self.curr_frame_data)
 
@@ -73,15 +73,32 @@ class GameScene(Scene):
             for key, sprite in processed_frames["update"].items():
                 self.curr_frame_data["sprites"][key] = sprite
 
-    def handle_input(self, key):
-        if key == 27:  # ESC
+    def handle_input(self, input):
+        
+        if input.is_held(keyboard.Key.esc):
             self.app.set_scene("menu")
-        elif key in [ord('a'), ord('A')]:
+
+        if input.was_pressed(keyboard.KeyCode.from_char('a')):
             self.game.state.set_office_pos("l")
 
-        elif key in [ord('d'), ord('D')]:
+        if input.was_pressed(keyboard.KeyCode.from_char('d')):
             self.game.state.set_office_pos("r")
 
-        elif key in [ord(' ')]:
-            self.game.state.set_light()
-    
+        # Light
+        if input.was_pressed(keyboard.Key.space):
+            self.game.state.set_light("center")
+
+        if input.was_released(keyboard.Key.space):
+            self.game.state.set_light("center", False)
+
+        if input.was_pressed(keyboard.KeyCode.from_char('k')):
+            self.game.state.set_light("left")
+
+        if input.was_released(keyboard.KeyCode.from_char('k')):
+            self.game.state.set_light("left", False)
+
+        if input.was_pressed(keyboard.KeyCode.from_char('l')):
+            self.game.state.set_light("right")
+
+        if input.was_released(keyboard.KeyCode.from_char('l')):
+            self.game.state.set_light("right", False)

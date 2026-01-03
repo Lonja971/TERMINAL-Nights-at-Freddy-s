@@ -1,3 +1,5 @@
+from utils.log import debug_log
+
 class GameState:
     def __init__(self):
         self.hour = 12
@@ -8,7 +10,7 @@ class GameState:
         self.office_pos = "l"
         self.camera = None
         self.is_mask = False
-        self.light = False
+        self.light = None
 
         self.visible_sprites = {}
 
@@ -21,5 +23,10 @@ class GameState:
     def set_office_pos(self, pos):
         self.office_pos = pos.lower()
 
-    def set_light(self):
-        self.light = not self.light
+    def set_light(self, side, is_on=True):
+        if self.light != side and is_on:
+            self.light = side
+            return
+        
+        if self.light == side and not is_on:
+            self.light = None

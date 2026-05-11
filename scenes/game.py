@@ -52,8 +52,7 @@ class GameScene(Scene):
     def extra_update(self):
         now = time.time()
 
-        if self.paused:
-            return
+        if self.paused: return
 
         if now - self._last_tick >= self.tick_rate:
             dt = now - self._last_tick
@@ -78,7 +77,10 @@ class GameScene(Scene):
                 self.curr_frame_data["sprites"][key] = sprite
 
     def handle_input(self, input):
-        
+        if self.game.state.state == "end":
+            if input.was_pressed(keyboard.Key.enter) or input.was_pressed(keyboard.KeyCode.from_char('\n')):
+                self.app.set_scene("menu")
+
         if input.is_held(keyboard.Key.esc):
             self.app.set_scene("menu")
 

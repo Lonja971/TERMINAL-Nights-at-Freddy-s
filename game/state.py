@@ -16,6 +16,8 @@ from game.anim.puppet import Puppet
 
 class GameState:
     def __init__(self, night_num):
+        self.state = "processing" # screamer_anima / end
+        self.screamer_anima_name = None
         self.buttery = ButterySystem()
         self.music_box = MusicBox(1)
         self.time = TimeSystem()
@@ -53,6 +55,10 @@ class GameState:
             "full_reset": False
         }
     
+    def set_screamer_anima(self, name):
+        self.state = "screamer_anima"
+        self.screamer_anima_name = name
+    
     def set_office_pos(self, pos):
         if self.is_camera_open: return
         
@@ -72,6 +78,7 @@ class GameState:
     def set_mask(self):
         if self.is_removing_mask: return
         if self.is_camera_open or self.is_tablet_opening_anim: return
+        if self.state == "screamer_anima": return
 
         self.is_mask = not self.is_mask
         if self.is_mask and self.light:
@@ -79,6 +86,7 @@ class GameState:
 
     def set_camera(self):
         if self.is_mask or self.is_removing_mask: return
+        if self.state == "screamer_anima": return
 
         self.is_camera_open = not self.is_camera_open
 
@@ -106,6 +114,7 @@ class GameState:
 
     def set_camera_light(self, is_on=True):
         if self.buttery.power <= 0: return
+        if self.state == "screamer_anima": return
 
         if self.is_camera_open or self.is_tablet_opening_anim:
             self.is_camera_light = is_on

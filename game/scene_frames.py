@@ -8,6 +8,7 @@ class GameSceneFrames:
         self.state = state
         self.night = night
         self.last_scene = None
+        self.game_over_noice_timer = 0
 
     def office_frames(self, curr_scene_frames, anim_state):
         fan_name = ROOMS[f"game_office_{"l" if self.state.office_pos == "l" else "r"}"]["sprites"]["office_fan_anima"]["name"]
@@ -47,6 +48,18 @@ class GameSceneFrames:
                 }
             }
         }
+
+        if self.state.state == "screamer_anima":
+            frames["sprites"][f"screamer_{self.state.screamer_anima_name}"] = {
+                "type": "animation",
+                "update_in": SPRITES[f"screamer_{self.state.screamer_anima_name}"]["update_in"],
+                "frames_num": len(SPRITES[f"screamer_{self.state.screamer_anima_name}"]["frames"]),
+                "mode": SPRITES[f"screamer_{self.state.screamer_anima_name}"]["mode"],
+                "data": {
+                    "curr_frame": anim_state.get("game_mask_off", {}).get("curr_frame", 0),
+                    "last_update": anim_state.get("game_mask_off", {}).get("last_update", time.time())
+                }
+            }
 
         if self.state.light == "center":
             frames["sprites"]["center_light"] = {
@@ -297,6 +310,25 @@ class GameSceneFrames:
             self.state.is_tablet_opening_anim = False
             frames_data["delete"].append("game_tablet_off")
 
+        #SCREAMERS
+        if self.state.state == "screamer_anima" and f"screamer_{self.state.screamer_anima_name}" not in curr_sprites_frames:
+            frames_data["update"][f"screamer_{self.state.screamer_anima_name}"] = {
+                "type": "animation",
+                "update_in": SPRITES[f"screamer_{self.state.screamer_anima_name}"]["update_in"],
+                "frames_num": len(SPRITES[f"screamer_{self.state.screamer_anima_name}"]["frames"]),
+                "mode": SPRITES[f"screamer_{self.state.screamer_anima_name}"]["mode"],
+                "data": {
+                    "curr_frame": 0,
+                    "last_update": time.time()
+                }
+            }
+
+        if self.state.state == "screamer_anima" and f"screamer_{self.state.screamer_anima_name}" in curr_sprites_frames:
+            last_frame = curr_sprites_frames[f"screamer_{self.state.screamer_anima_name}"]["data"]["curr_frame"]
+            if last_frame + 1 >= curr_sprites_frames[f"screamer_{self.state.screamer_anima_name}"]["frames_num"]:
+                self.state.state = "end"
+                debug_log("REALY_GAME_OVER")
+
         return frames_data
     
     def camera_frames(self, curr_scene_frames, anim_state):
@@ -517,6 +549,41 @@ class GameSceneFrames:
 
         return frames_data
 
+    def game_over_frames(self):
+        frames = {
+            "room": "game_over",
+            "sprites": {
+                "camera_not_found": {
+                    "type": "animation",
+                    "update_in": SPRITES["camera_not_found"]["update_in"],
+                    "frames_num": len(SPRITES["camera_not_found"]["frames"]),
+                    "mode": SPRITES["camera_not_found"]["mode"],
+                    "data": {
+                        "curr_frame": 0,
+                        "last_update": time.time()
+                    }
+                }
+            }
+        }
+
+        return frames
+    
+    def update_game_over_frames(self, curr_scene_frames, anim_state):
+        frames_data = {
+            "update": {},
+            "delete": []
+        }
+
+        if self.game_over_noice_timer >= 15:
+            frames_data["delete"].append("camera_not_found")
+            frames_data["update"]["game_over_text"] = {
+                "type": "static",
+            }
+        else:
+            self.game_over_noice_timer += 1
+
+        return frames_data
+
     def process_scene_frames(self, curr_scene_frames, anim_state):
         if self.last_scene == None: self.last_scene = curr_scene_frames["room"]
 
@@ -526,7 +593,18 @@ class GameSceneFrames:
             "delete": []
         }
 
-        if self.state.is_camera_open == False:
+        if self.state.state == "end":
+            if self.last_scene != "game_over":
+                frames_data["rewrite"] = True
+                frames_data["update"] = self.game_over_frames()
+            else:
+                updated_frames = self.update_game_over_frames(curr_scene_frames, anim_state)
+                frames_data["update"] = updated_frames["update"]
+                frames_data["delete"] = updated_frames["delete"]
+
+            self.last_scene = "game_over"
+
+        elif self.state.is_camera_open == False:
             if self.last_scene != f"game_office_{self.state.office_pos}":
                 frames_data["rewrite"] = True
                 frames_data["update"] = self.office_frames(curr_scene_frames, anim_state)
@@ -547,5 +625,7 @@ class GameSceneFrames:
                 frames_data["delete"] = updated_frames["delete"]
 
             self.last_scene = "camera"
+
+        debug_log(curr_scene_frames)
 
         return frames_data

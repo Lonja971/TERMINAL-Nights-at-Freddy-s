@@ -8,13 +8,14 @@ class NewBon(Anim):
         super().__init__(intelligence, locations)
 
     def update(self):
-        if not self.is_active:
-            return
+        super().update()
 
         if self.next_move_time == None:
             self.schedule_next_move()
             return
         
         if time.time() >= self.next_move_time:
-            self.try_move()
-            self.schedule_next_move()
+            is_moving = super().try_move()
+
+            if is_moving:
+                self.move()

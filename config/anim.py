@@ -1,6 +1,6 @@
 ANIMATRONICS = {
     "new_bon": {
-        "default_position": 9,
+        "default_position": 2,
         "path_graph": {
             9: [3],
             3: [4],
@@ -11,8 +11,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "new_fred": {
         "default_position": 9,
@@ -24,8 +23,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "new_bird": {
         "default_position": 9,
@@ -40,8 +38,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "old_bon": {
         "default_position": 8,
@@ -55,8 +52,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "old_fred": {
         "default_position": 7,
@@ -68,8 +64,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "old_bird": {
         "default_position": 8,
@@ -81,8 +76,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "old_foxy": {
         "default_position": 18,
@@ -93,8 +87,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "mangle": {
         "default_position": 12,
@@ -111,8 +104,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "bb": {
         "default_position": 10,
@@ -123,8 +115,7 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
     "puppet": {
         "default_position": 11,
@@ -133,7 +124,6 @@ ANIMATRONICS = {
         },
         "move_time": 12,
         "time_for_screamer": 1,
-        "office_time": 5,
-        "min_activation_time": [12, 0]
+        "office_time": 5
     },
 }

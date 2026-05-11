@@ -153,7 +153,7 @@ ROOMS = {
                 "name": "screamer_new_bon",
                 "x": "left",
                 "y": "top",
-                "z": 9,
+                "z": 21,
             }
         }
     },
@@ -240,6 +240,12 @@ ROOMS = {
                 "y": "top",
                 "z": 9,
             },
+            "screamer_new_bon": {
+                "name": "screamer_new_bon",
+                "x": "left",
+                "y": "top",
+                "z": 21,
+            }
         }
     },
     "camera": {
@@ -573,5 +579,25 @@ ROOMS = {
                 "padding": {"x": 65, "y": 26}
             },
         }
-    }
+    },
+    "game_over": {
+        "bg": {
+            "name": "game_over_bg"
+        },
+        "sprites": {
+            "game_over_text": {
+                "name": "game_over_text",
+                "x": "right",
+                "y": "bottom",
+                "z": 6,
+                "padding": {"x":6, "y":4}
+            },
+            "camera_not_found": {
+                "name": "camera_not_found",
+                "x": "left",
+                "y": "top",
+                "z": 3,
+            },
+        }
+    },
 }

@@ -246,6 +246,14 @@ SPRITES = {
         "type": "static",
         "path": "game/cameras/12/mangle_l.txt",
     },
+    "game_over_bg": {
+        "type": "static",
+        "path": "game/game_over/bg.txt",
+    },
+    "game_over_text": {
+        "type": "static",
+        "path": "game/game_over/text.txt"
+    },
 
     # --------------------- #
     #      ANIMATIONS       #

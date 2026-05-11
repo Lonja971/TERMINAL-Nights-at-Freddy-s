@@ -2,7 +2,7 @@ NIGHTS = {
     1: {
         "anim": {
             "new_bon" : {
-                "intelligence": 2
+                "intelligence": 20
             },
             "new_fred" : {
                 "intelligence": 2

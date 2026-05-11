@@ -57,4 +57,7 @@ class Anim:
         debug_log(f"{self.name} moved to {self.pos}")
 
     def update(self):
+        if not self.is_active:
+            return
+
         pass

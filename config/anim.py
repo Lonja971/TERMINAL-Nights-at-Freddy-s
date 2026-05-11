@@ -59,7 +59,7 @@ ANIMATRONICS = {
         "min_activation_time": [12, 0]
     },
     "old_fred": {
-        "default_position": 8,
+        "default_position": 7,
         "path_graph": {
             8: [7],
             7:[3],

@@ -149,6 +149,12 @@ ROOMS = {
                 "y": "top",
                 "z": 9,
             },
+            "screamer_new_bon": {
+                "name": "screamer_new_bon",
+                "x": "left",
+                "y": "top",
+                "z": 9,
+            }
         }
     },
     "game_office_r": {
@@ -192,12 +198,6 @@ ROOMS = {
                 "z": 6,
                 "padding": {"x": 38, "y": 0}
             },
-            #"center_light": {
-            #    "name": "game_center_light_big_r",
-            #    "x": 0,
-            #    "y": 0,
-            #    "z": 3,
-            #},
             "center_light": {
                 "name": "game_center_light",
                 "x": 70,
@@ -429,6 +429,13 @@ ROOMS = {
                 "y": "top",
                 "z": 3,
             },
+            "cam_7_old_fred_l": {
+                "name": "cam_7_old_fred_l",
+                "x": "right",
+                "y": "top",
+                "z": 3,
+                "padding": {"x": 122, "y": 21}
+            },
             "cam_8": {
                 "name": "cam_8",
                 "x": "left",
@@ -503,9 +510,46 @@ ROOMS = {
                 "y": "top",
                 "z": 3,
             },
+            "cam_10_bb": {
+                "name": "cam_10_bb",
+                "x": "left",
+                "y": "bottom",
+                "z": 3,
+            },
+            "cam_10_bb_l": {
+                "name": "cam_10_bb_l",
+                "x": "left",
+                "y": "bottom",
+                "z": 3,
+            },
+            "cam_10_new_fred_l": {
+                "name": "cam_10_new_fred_l",
+                "x": "left",
+                "y": "bottom",
+                "z": 3,
+                "padding": {"x": 72, "y": 21}
+            },
             "cam_11": {
                 "name": "cam_11",
                 "x": "left",
+                "y": "top",
+                "z": 3,
+            },
+            "cam_11_puppet1": {
+                "name": "cam_11_puppet1",
+                "x": "right",
+                "y": "top",
+                "z": 3,
+            },
+            "cam_11_puppet2": {
+                "name": "cam_11_puppet2",
+                "x": "right",
+                "y": "top",
+                "z": 3,
+            },
+            "cam_11_puppet3": {
+                "name": "cam_11_puppet3",
+                "x": "right",
                 "y": "top",
                 "z": 3,
             },
@@ -520,6 +564,13 @@ ROOMS = {
                 "x": "left",
                 "y": "top",
                 "z": 3,
+            },
+            "cam_12_mangle_l": {
+                "name": "cam_12_mangle_l",
+                "x": "right",
+                "y": "top",
+                "z": 3,
+                "padding": {"x": 65, "y": 26}
             },
         }
     }

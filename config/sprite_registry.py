@@ -154,6 +154,10 @@ SPRITES = {
         "type": "static",
         "path": "game/cameras/7/def_l.txt",
     },
+    "cam_7_old_fred_l": {
+        "type": "static",
+        "path": "game/cameras/7/old_fred_l.txt",
+    },
     "cam_8": {
         "type": "static",
         "path": "game/cameras/8/def.txt",
@@ -202,9 +206,33 @@ SPRITES = {
         "type": "static",
         "path": "game/cameras/10/def_l.txt",
     },
+    "cam_10_bb": {
+        "type": "static",
+        "path": "game/cameras/10/bb.txt",
+    },
+    "cam_10_bb_l": {
+        "type": "static",
+        "path": "game/cameras/10/bb_l.txt",
+    },
+    "cam_10_new_fred_l": {
+        "type": "static",
+        "path": "game/cameras/10/new_fred_l.txt",
+    },
     "cam_11": {
         "type": "static",
         "path": "game/cameras/11/def.txt",
+    },
+    "cam_11_puppet1": {
+        "type": "static",
+        "path": "game/cameras/11/puppet_1.txt",
+    },
+    "cam_11_puppet2": {
+        "type": "static",
+        "path": "game/cameras/11/puppet_2.txt",
+    },
+    "cam_11_puppet3": {
+        "type": "static",
+        "path": "game/cameras/11/puppet_3.txt",
     },
     "cam_12": {
         "type": "static",
@@ -213,6 +241,10 @@ SPRITES = {
     "cam_12_l": {
         "type": "static",
         "path": "game/cameras/12/def_l.txt",
+    },
+    "cam_12_mangle_l": {
+        "type": "static",
+        "path": "game/cameras/12/mangle_l.txt",
     },
 
     # --------------------- #
@@ -300,6 +332,29 @@ SPRITES = {
         ],
         "update_in": 0.5,
         "mode": "loop",
+    },
+    "screamer_new_bon": {
+        "type": "animation",
+        "frames": [
+            "game/screamers/new_bon/5.txt",
+            "game/screamers/new_bon/6.txt",
+            "game/screamers/new_bon/7.txt",
+            "game/screamers/new_bon/8.txt",
+            "game/screamers/new_bon/9.txt",
+            "game/screamers/new_bon/10.txt",
+            "game/screamers/new_bon/11.txt",
+            "game/screamers/new_bon/12.txt",
+            "game/screamers/new_bon/13.txt",
+            "game/screamers/new_bon/14.txt",
+            "game/screamers/new_bon/15.txt",
+            "game/screamers/new_bon/16.txt",
+            "game/screamers/new_bon/17.txt",
+            "game/screamers/new_bon/18.txt",
+            "game/screamers/new_bon/19.txt",
+            "game/screamers/new_bon/20.txt",
+        ],
+        "update_in": 0.02,
+        "mode": "hold",
     },
 
     # ------------------- #

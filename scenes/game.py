@@ -8,6 +8,7 @@ from config.sprite_registry import SPRITES
 class GameScene(Scene):
     def __init__(self, app, save_state, params):
         super().__init__(app)
+        debug_log(params)
         self.game = Game(params["night_num"])
         self.tick_rate = 0.10
         self._last_tick = time.time()
@@ -44,7 +45,7 @@ class GameScene(Scene):
                         "curr_frame": 0,
                         "last_update": time.time()
                     }
-                }
+                },
             }
         }
 

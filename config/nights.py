@@ -4,6 +4,9 @@ NIGHTS = {
             "new_bon" : {
                 "intelligence": 2
             },
+            "new_fred" : {
+                "intelligence": 2
+            },
         }
     }
 }

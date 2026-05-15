@@ -1,5 +1,5 @@
 def calculate_activation_time(intelligence):
-    start_minutes = 15
+    start_minutes = 0
     end_minutes = 3 * 60
 
     total_range = end_minutes - start_minutes

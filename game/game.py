@@ -23,7 +23,11 @@ class Game:
 
                     elif 20 in self.state.locations and len(self.state.locations[20]) > 0 and name in self.state.locations[20]:
                         if anim_class.screamer_timer <= 0:
-                            self.state.set_screamer_anima(self.state.locations[20][0])
+                            if self.state.is_mask or self.state.is_camera_open:
+                                self.state.screamer_disabeling()
+                                anim_class.screamer_timer = 3
+                            else:
+                                self.state.set_screamer_anima(self.state.locations[20][0])
                         else:
                             anim_class.process_screamer_waiting()
 

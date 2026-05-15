@@ -46,6 +46,9 @@ class GameState:
         self.is_removing_mask = False
         self.light = None
 
+        self.is_mask_disabled = False
+        self.is_tablet_disabled = False
+
     def get_buttery_level(self):
         return self.buttery.power
 
@@ -76,6 +79,7 @@ class GameState:
             self.light = None
 
     def set_mask(self):
+        if self.is_mask_disabled: return
         if self.is_removing_mask: return
         if self.is_camera_open or self.is_tablet_opening_anim: return
         if self.state == "screamer_anima": return
@@ -97,6 +101,7 @@ class GameState:
             self.light = None
 
     def start_opening_tablet(self):
+        if self.is_tablet_disabled: return
         if self.is_mask or self.is_removing_mask: return
 
         self.is_tablet_opening_anim = not self.is_tablet_opening_anim
@@ -135,3 +140,12 @@ class GameState:
             
         elif isinstance(cam, int):
             pass
+
+    def screamer_disabeling(self):
+        self.is_mask_disabled = True
+        self.is_tablet_disabled = True
+        self.is_mask = False
+        if self.is_camera_open:
+            self.is_camera_open = False
+            self.tablet_anim_dir = "close"
+            self.is_tablet_opening_anim = True

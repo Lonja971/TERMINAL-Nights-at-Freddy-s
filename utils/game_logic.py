@@ -16,8 +16,8 @@ def calculate_activation_time(intelligence):
     return [display_hours, mins]
 
 def calculate_iter_for_screamer(intelligence):
-    min_iter = 4
-    avaible_iter = 8
+    min_iter = 10
+    avaible_iter = 25
 
     iter_num = min_iter + int(avaible_iter / 20 * (21 - intelligence))
 

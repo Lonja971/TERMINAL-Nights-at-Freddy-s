@@ -9,23 +9,30 @@ class Anim:
         anim_data = ANIMATRONICS[self.name]
         self.def_pos = anim_data["default_position"]
         self.path_graph = anim_data["path_graph"]
+        self.need_time_to_check = anim_data["checking_time"]
         self.is_active = False
+        self.is_attacking = False
 
         self.intelligence = intelligence
         self.pos = self.def_pos
         self.move_time = anim_data["move_time"]
-        self.iter_for_screamer = calculate_iter_for_screamer(intelligence)
+        self.value_for_screamer = calculate_iter_for_screamer(intelligence)
         self.office_time = anim_data["office_time"]
         self.activation_time = calculate_activation_time(intelligence)
         self.next_move_time = None
 
-        self.screamer_timer = 0
+        self.screamer_value = 0
+        self.checking_time = 0
+        self.screamer_timer = 20
 
         if self.pos not in self.locations:
             self.locations[self.pos] = []
         self.locations[self.pos].append(self.name)
 
         debug_log(f"{self.name} - {self.activation_time}")
+
+    def process_screamer_waiting(self):
+        self.screamer_timer -= 1
 
     def schedule_next_move(self):
         speed = self.intelligence * 0.4
@@ -50,7 +57,8 @@ class Anim:
         self.schedule_next_move()
 
     def change_pos(self, new_pos):
-        self.screamer_timer = 0
+        self.screamer_value = 0
+        self.checking_time = 0
 
         if self.name in self.locations[self.pos]:
             self.locations[self.pos].remove(self.name)
@@ -64,13 +72,34 @@ class Anim:
         debug_log(f"{self.name} moved to {self.pos}")
 
     def process_office_watching(self):
-        if self.screamer_timer >= self.iter_for_screamer:
-            self.change_pos(20)
+        if self.screamer_value >= self.value_for_screamer:
+            self.is_attacking = True
+
+        self.checking_time += 1
+
+        if self.checking_time >= self.need_time_to_check:
+            if self.is_attacking:
+                self.change_pos(20)
+            else:
+                self.change_pos(self.def_pos)
 
     def update(self):
         if not self.is_active:
             return
-
+        
         if self.pos == 15:
+            self.next_move_time = None
             self.process_office_watching()
-            debug_log(f"{self.name} = {self.pos} - {self.screamer_timer} ({self.iter_for_screamer})")
+            debug_log(f"{self.name} = {self.pos} - {self.screamer_value} ({self.value_for_screamer})")
+            return
+
+        if self.next_move_time == None:
+            self.schedule_next_move()
+            return
+        
+        if time.time() >= self.next_move_time:
+            is_moving = self.try_move()
+
+            if is_moving:
+                self.move()
+                

@@ -149,6 +149,20 @@ class GameSceneFrames:
                         "type": "static"
                     }
 
+        if 15 in self.state.locations and len(self.state.locations[15]) > 0:
+            for name in self.state.locations[15]:
+                if f"check_{name}" not in curr_scene_frames:
+                    frames["sprites"][f"check_{name}"] = {
+                        "type": "animation",
+                        "update_in": SPRITES[f"check_{name}"]["update_in"],
+                        "frames_num": len(SPRITES[f"check_{name}"]["frames"]),
+                        "mode": SPRITES[f"check_{name}"]["mode"],
+                        "data": {
+                            "curr_frame": anim_state.get(f"check_{name}", {}).get("curr_frame", 0),
+                            "last_update": anim_state.get(f"check_{name}", {}).get("last_update", time.time())
+                        }
+                    }
+
         return frames
     
     def update_office_frames(self, curr_scene_frames, anim_state):
@@ -232,6 +246,30 @@ class GameSceneFrames:
                     if key.startswith("right_light_"):
                         frames_data["delete"].append(key)
 
+        #CHECK
+        if 15 in self.state.locations and len(self.state.locations[15]) > 0:
+            for name in self.state.locations[15]:
+                if f"check_{name}" not in curr_sprites_frames:
+                    frames_data["update"][f"check_{name}"] = {
+                        "type": "animation",
+                        "update_in": SPRITES[f"check_{name}"]["update_in"],
+                        "frames_num": len(SPRITES[f"check_{name}"]["frames"]),
+                        "mode": SPRITES[f"check_{name}"]["mode"],
+                        "data": {
+                            "curr_frame": anim_state.get(f"check_{name}", {}).get("curr_frame", 0),
+                            "last_update": anim_state.get(f"check_{name}", {}).get("last_update", time.time())
+                        }
+                    }
+
+            allowed_checks = {f"check_{n}" for n in self.state.locations[15]}
+            for key in list(curr_sprites_frames.keys()):
+                if key.startswith("check_") and key not in allowed_checks:
+                    frames_data["delete"].append(key)
+        else:
+            for key in list(curr_sprites_frames.keys()):
+                if key.startswith("check_"):
+                    frames_data["delete"].append(key)
+
         if curr_sprites_frames["game_buttery"]["data"]["value"] != int(self.state.get_buttery_level()):
             frames_data["update"]["game_buttery"] = {
                 "type": "generated",
@@ -309,6 +347,22 @@ class GameSceneFrames:
         if "game_tablet_off" in curr_sprites_frames and curr_sprites_frames["game_tablet_off"]["data"]["curr_frame"] == curr_sprites_frames["game_tablet_off"]["frames_num"] - 1:
             self.state.is_tablet_opening_anim = False
             frames_data["delete"].append("game_tablet_off")
+
+
+        #CHECK
+        if 15 in self.state.locations and len(self.state.locations[15]) > 0:
+            for name in self.state.locations[15]:
+                if f"check_{name}" not in curr_sprites_frames:
+                    frames_data["update"][f"check_{name}"] = {
+                        "type": "animation",
+                        "update_in": SPRITES[f"check_{name}"]["update_in"],
+                        "frames_num": len(SPRITES[f"check_{name}"]["frames"]),
+                        "mode": SPRITES[f"check_{name}"]["mode"],
+                        "data": {
+                            "curr_frame": anim_state.get("curr_frame", {}).get("curr_frame", 0),
+                            "last_update": anim_state.get("last_update", {}).get("last_update", time.time())
+                        }
+                    }
 
         #SCREAMERS
         if self.state.state == "screamer_anima" and f"screamer_{self.state.screamer_anima_name}" not in curr_sprites_frames:
@@ -625,7 +679,5 @@ class GameSceneFrames:
                 frames_data["delete"] = updated_frames["delete"]
 
             self.last_scene = "camera"
-
-        debug_log(curr_scene_frames)
 
         return frames_data

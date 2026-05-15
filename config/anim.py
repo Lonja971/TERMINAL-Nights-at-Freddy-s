@@ -10,7 +10,7 @@ ANIMATRONICS = {
             17: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "new_fred": {
@@ -22,7 +22,7 @@ ANIMATRONICS = {
             14: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "new_bird": {
@@ -37,7 +37,7 @@ ANIMATRONICS = {
             16: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "old_bon": {
@@ -51,7 +51,7 @@ ANIMATRONICS = {
             5: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "old_fred": {
@@ -63,7 +63,7 @@ ANIMATRONICS = {
             14: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "old_bird": {
@@ -75,7 +75,7 @@ ANIMATRONICS = {
             6: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "old_foxy": {
@@ -86,7 +86,7 @@ ANIMATRONICS = {
             13: [15],
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "mangle": {
@@ -103,7 +103,7 @@ ANIMATRONICS = {
             17: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "bb": {
@@ -114,7 +114,7 @@ ANIMATRONICS = {
             16: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
     "puppet": {
@@ -123,7 +123,7 @@ ANIMATRONICS = {
             11: [15]
         },
         "move_time": 12,
-        "time_for_screamer": 1,
+        "checking_time": 50,
         "office_time": 5
     },
 }

@@ -149,6 +149,13 @@ ROOMS = {
                 "y": "top",
                 "z": 9,
             },
+            "check_new_bon": {
+                "name": "check_new_bon",
+                "x": "right",
+                "y": "bottom",
+                "z": 7,
+                "padding": {"x": -133, "y": 0}
+            },
             "screamer_new_bon": {
                 "name": "screamer_new_bon",
                 "x": "left",
@@ -239,6 +246,13 @@ ROOMS = {
                 "x": "left",
                 "y": "top",
                 "z": 9,
+            },
+            "check_new_bon": {
+                "name": "check_new_bon",
+                "x": "right",
+                "y": "bottom",
+                "z": 7,
+                "padding": {"x": -80, "y": 0}
             },
             "screamer_new_bon": {
                 "name": "screamer_new_bon",

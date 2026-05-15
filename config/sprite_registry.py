@@ -341,6 +341,26 @@ SPRITES = {
         "update_in": 0.5,
         "mode": "loop",
     },
+    "check_new_bon": {
+        "type": "animation",
+        "frames": [
+            "game/check/new_bon/orig.txt",
+            "game/check/new_bon/0.txt",
+            "game/check/new_bon/1.txt",
+            "game/check/new_bon/2.txt",
+            "game/check/new_bon/3.txt",
+            "game/check/new_bon/4.txt",
+            "game/check/new_bon/5.txt",
+            "game/check/new_bon/6.txt",
+            "game/check/new_bon/7.txt",
+            "game/check/new_bon/8.txt",
+            "game/check/new_bon/9.txt",
+            "game/check/new_bon/10.txt",
+            "game/check/new_bon/11.txt",
+        ],
+        "update_in": 0.01,
+        "mode": "hold"
+    },
     "screamer_new_bon": {
         "type": "animation",
         "frames": [

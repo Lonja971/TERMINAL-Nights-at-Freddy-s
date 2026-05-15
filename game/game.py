@@ -17,11 +17,15 @@ class Game:
                     if anim_class.activation_time[0] >= self.state.time.time[0] and anim_class.activation_time[1] <= self.state.time.time[1]:
                         anim_class.is_active = True
                 else:
-                    if 15 in self.state.locations and len(self.state.locations[15]) > 0:
-                        for name in self.state.locations[15]:
-                            self.state.animatronics[name].screamer_timer += 1
-                    elif 20 in self.state.locations and len(self.state.locations[20]) > 0:
-                        self.state.set_screamer_anima(self.state.locations[20][0])
+                    if 15 in self.state.locations and len(self.state.locations[15]) > 0 and name in self.state.locations[15]:
+                        if not self.state.is_mask:
+                            anim_class.screamer_value += 1
+
+                    elif 20 in self.state.locations and len(self.state.locations[20]) > 0 and name in self.state.locations[20]:
+                        if anim_class.screamer_timer <= 0:
+                            self.state.set_screamer_anima(self.state.locations[20][0])
+                        else:
+                            anim_class.process_screamer_waiting()
 
                     anim_class.update()
 

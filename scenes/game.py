@@ -78,7 +78,11 @@ class GameScene(Scene):
 
     def handle_input(self, input):
         if self.game.state.state == "end":
-            if input.was_pressed(keyboard.Key.enter) or input.was_pressed(keyboard.KeyCode.from_char('\n')):
+            if (input.was_pressed(keyboard.Key.enter)
+                or input.was_pressed(keyboard.KeyCode.from_char('\n'))
+                or input.was_pressed(keyboard.KeyCode.from_char('z'))
+                or input.was_pressed(keyboard.KeyCode.from_char('x'))
+            ):
                 self.app.set_scene("menu")
 
         if input.is_held(keyboard.Key.esc):
